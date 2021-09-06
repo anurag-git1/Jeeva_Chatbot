@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = (BASE_DIR/ "templates")
+TEMPLATE_DIR = (BASE_DIR / "templates")
 print(TEMPLATE_DIR)
 
 
@@ -22,12 +22,12 @@ print(TEMPLATE_DIR)
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vg0tob%!m9dx83c-l)axbgf^a5z_-mi9u&^xl)fqv!f87v+#mi'
+SECRET_KEY = 'django-insecure-vg0tob%!m9dx83c-l)axbgf^a5z_-mi9u&^xl)fqv!f87v+#m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','9e96-223-178-212-242.ngrok.io']
+ALLOWED_HOSTS = ['localhost','1483-223-178-212-242.ngrok.io']
 
 
 # Application definition
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user_app',
+    'squad',
 ]
 
 MIDDLEWARE = [
@@ -75,10 +77,25 @@ WSGI_APPLICATION = 'Jeeva_ChatBot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+DB_NAME = 'squadbot'
+DB_USER = 'arnadda'
+DB_PASSWORD = 'password'
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': DB_NAME,
+        'USER':DB_USER,
+        'PASSWORD':DB_PASSWORD,
+        'HOST':'localhost',
+        'PORT':'5432',
     }
 }
 
@@ -101,7 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -115,15 +131,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR/ "static"]
-print("static",STATICFILES_DIRS)
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = "/squad/"
+# LOGOUT_REDIRECT_URL = '/'
